@@ -3,4 +3,4 @@ set -euo pipefail
 
 _HA_VERSION=$(jq -r '.homeassistant' hacs.json)
 
-python3 -m pip install "homeassistant==$_HA_VERSION"
+python3 -m pip install colorlog "homeassistant==$_HA_VERSION" zlib_ng
