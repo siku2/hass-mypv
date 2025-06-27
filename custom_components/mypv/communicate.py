@@ -5,6 +5,7 @@ import json
 import logging
 import socket
 import time
+from typing import Any, Literal
 
 import aiohttp
 from homeassistant.config_entries import ConfigEntry
@@ -64,7 +65,7 @@ class MypvCommunicator(DataUpdateCoordinator):
         self._next_update = 0
         update_interval = MIN_TIME_BETWEEN_UPDATES
         self.logger = _LOGGER
-        self.devices = []
+        self.devices: list[MpyDevice] = []
         self.hass = hass
         super().__init__(
             hass,
@@ -101,7 +102,7 @@ class MypvCommunicator(DataUpdateCoordinator):
         ):
             return await resp.text()
 
-    async def check_ip(self, ip):
+    async def check_ip(self, ip: str) -> dict[str, Any] | Literal[False]:
         """Update inverter info."""
         try:
             url = f"http://{ip}/mypv_dev.jsn"

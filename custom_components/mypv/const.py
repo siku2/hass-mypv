@@ -1,6 +1,7 @@
 """Constants for the myPV integration."""
 
 from datetime import timedelta
+from typing import Any
 
 from homeassistant.const import (
     UnitOfElectricCurrent,
@@ -23,7 +24,7 @@ MIN_IP = "min_ip"
 MAX_IP = "max_ip"
 DEV_IP = "dev_ip"
 
-SENSOR_TYPES = {
+SENSOR_TYPES: dict[str, tuple[str, Any, str]] = {
     "device": ["Device", None, "text"],
     "acthor9s": ["Acthor 9s", None, "text"],
     "fwversion": ["Control Unit Fw Version", None, "version"],
@@ -55,12 +56,12 @@ SENSOR_TYPES = {
     "power3_grid": ["power3_grid", UnitOfPower.WATT, "sensor"],
     "load_state": ["load_state", None, "sensor"],
     "load_nom": ["load_nom", UnitOfPower.WATT, "sensor"],
-    "rel1_out": ["Relais", None, "binary_sensor"],
+    "rel1_out": ["Relays", None, "binary_sensor"],
     "ww1target": ["Target temperature", UnitOfTemperature.CELSIUS, "sensor"],
-    "temp1": ["Temperatur 1", UnitOfTemperature.CELSIUS, "sensor"],
-    "temp2": ["Temperatur 2", UnitOfTemperature.CELSIUS, "sensor"],
-    "temp3": ["Temperatur 3", UnitOfTemperature.CELSIUS, "sensor"],
-    "temp4": ["Temperatur 4", UnitOfTemperature.CELSIUS, "sensor"],
+    "temp1": ["Temperature 1", UnitOfTemperature.CELSIUS, "sensor"],
+    "temp2": ["Temperature 2", UnitOfTemperature.CELSIUS, "sensor"],
+    "temp3": ["Temperature 3", UnitOfTemperature.CELSIUS, "sensor"],
+    "temp4": ["Temperature 4", UnitOfTemperature.CELSIUS, "sensor"],
     "boostactive": ["Start Boost", None, "button"],
     "legboostnext": ["legboostnext", None, "sensor"],
     "date": ["Date", None, "sensor"],
@@ -152,7 +153,7 @@ SENSOR_TYPES = {
     "ps_upd_state": ["Power Unit Update State", None, "upd_stat"],
     "p9s_upd_state": ["Acthor 9 Power Unit Update State", None, "upd_stat"],
 }
-SETUP_TYPES = {
+SETUP_TYPES: dict[str, tuple[str, Any, str]] = {
     # "mainmode": ["Operating Mode", None, "", "sensor"],
     # "mode9s": ["Operating Mode Acthor 9", None, "", "sensor"],
     "devmode": ["Enable Device", None, "switch"],

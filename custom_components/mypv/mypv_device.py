@@ -1,8 +1,8 @@
 """myPV integration."""
 
 import logging
+from typing import TYPE_CHECKING, Any
 
-from homeassistant.core import HomeAssistant
 from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
@@ -13,16 +13,19 @@ from .number import MpvPidPowerControl, MpvPowerControl, MpvSetupControl, MpvTou
 from .sensor import MpvDevStatSensor, MpvSensor, MpvUpdateSensor
 from .switch import MpvHttpSwitch, MpvSetupSwitch
 
+if TYPE_CHECKING:
+    from .communicate import MypvCommunicator
+
 _LOGGER = logging.getLogger(__name__)
 
 
 class MpyDevice(CoordinatorEntity):
     """Class definition of an myPV device."""
 
-    def __init__(self, comm, ip, info) -> None:
+    def __init__(self, comm: "MypvCommunicator", ip: str, info: dict[str, Any]) -> None:
         """Initialize the device."""
         super().__init__(comm)
-        self._hass: HomeAssistant = comm.hass
+        self._hass = comm.hass
         self._entry = comm.config_entry
         self._info = info
         self._ip = ip
