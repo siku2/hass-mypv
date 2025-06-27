@@ -36,8 +36,8 @@ async def async_setup_entry(
         async_add_entities(device.binary_sensors)
 
 
-class MpvBinSensor(BinarySensorEntity, CoordinatorEntity):
-    """Representation of a MyPV binary sensors."""
+class MpvBinSensor(CoordinatorEntity, BinarySensorEntity):
+    """Representation of a MyPV binary sensor."""
 
     def __init__(
         self, device: "MpyDevice", key: str, info: tuple[str, Any, str]
