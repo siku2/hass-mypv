@@ -49,8 +49,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
 
         if not comm.last_update_success:
             raise ConfigEntryNotReady(
-            f"Update of myPV device at {entry.data[DEV_IP]} failed"
-        )
+                f"Update of myPV device at {entry.data[DEV_IP]} failed"
+            )
 
         hass.data[DOMAIN][entry.entry_id] = {
             COMM_HUB: comm,
