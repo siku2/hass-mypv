@@ -1,7 +1,7 @@
 """Sensors of myPV integration."""
 
-from datetime import datetime
 import logging
+from datetime import datetime
 
 from homeassistant.components.sensor import SensorDeviceClass, SensorStateClass
 from homeassistant.const import (
@@ -65,7 +65,7 @@ class MpvSensor(CoordinatorEntity):
                 loadNom = int(self.comm.data["load_nom"])
                 state = (relOut * loadNom) + int(state)
             self._last_value = state
-        except Exception as err_msg:
+        except Exception:
             state = self._last_value
         if state is None:
             return state
@@ -171,7 +171,7 @@ class MpvUpdateSensor(MpvSensor):
         try:
             state = self.device.data[self._key]
             self._last_value = state
-        except Exception as err_msg:
+        except Exception:
             state = self._last_value
         return UPDATE_STATUS[state]
 
@@ -221,7 +221,7 @@ class MpvDevStatSensor(MpvSensor):
         try:
             state = self.device.state
             self._last_value = state + 1
-        except Exception as err_msg:
+        except Exception:
             pass
         return DEVICE_STATE[self._last_value]
 
@@ -255,7 +255,7 @@ class MpvEnergySensor(MpvSensor):
             # print(f"Timediff = {dt}")
             p_val = self.device.data[self._key.replace("int_", "")]
             state = self._last_value + p_val / 1000 * dt / 3600
-        except Exception as err_msg:
+        except Exception:
             state = self._last_value
         if state is None:
             return state

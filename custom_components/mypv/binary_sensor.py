@@ -47,7 +47,7 @@ class MpvBinSensor(CoordinatorEntity):
                 loadNom = int(self.comm.data["load_nom"])
                 state = (relOut * loadNom) + int(state)
             self._last_value = state
-        except Exception as err_msg:
+        except Exception:
             state = self._last_value
         if state is None:
             return state

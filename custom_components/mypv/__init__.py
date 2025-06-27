@@ -1,13 +1,12 @@
 """Integration ELWA myPV."""
 
-from httpcore import TimeoutException
-import voluptuous as vol
+from typing import Any
 
 from homeassistant.config_entries import SOURCE_IMPORT, ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryNotReady
-import homeassistant.helpers.config_validation as cv
 from homeassistant.helpers.device_registry import DeviceEntry
+from httpcore import TimeoutException
 
 from .communicate import MypvCommunicator
 from .const import COMM_HUB, DEV_IP, DOMAIN
@@ -22,7 +21,7 @@ PLATFORMS: list[str] = [
 ]
 
 
-async def async_setup(hass: HomeAssistant, config):
+async def async_setup(hass: HomeAssistant, config: dict[str, Any]) -> bool:
     """Platform setup, do nothing."""
     hass.data.setdefault(DOMAIN, {})
 
@@ -31,7 +30,9 @@ async def async_setup(hass: HomeAssistant, config):
 
     hass.async_create_task(
         hass.config_entries.flow.async_init(
-            DOMAIN, context={"source": SOURCE_IMPORT}, data=dict(config[DOMAIN])
+            DOMAIN,
+            context={"source": SOURCE_IMPORT},
+            data=dict(config[DOMAIN]),
         )
     )
     return True

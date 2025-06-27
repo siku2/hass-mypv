@@ -10,7 +10,7 @@ from .binary_sensor import MpvBinSensor
 from .button import MpvBoostButton
 from .const import DOMAIN, SENSOR_TYPES, SETUP_TYPES
 from .number import MpvPidPowerControl, MpvPowerControl, MpvSetupControl, MpvToutControl
-from .sensor import MpvDevStatSensor, MpvEnergySensor, MpvSensor, MpvUpdateSensor
+from .sensor import MpvDevStatSensor, MpvSensor, MpvUpdateSensor
 from .switch import MpvHttpSwitch, MpvSetupSwitch
 
 _LOGGER = logging.getLogger(__name__)

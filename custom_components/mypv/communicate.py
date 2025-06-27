@@ -1,14 +1,12 @@
 """Provides the myPV DataUpdateCoordinator."""
 
 import asyncio
-from datetime import timedelta
 import json
 import logging
 import socket
 import time
 
 import aiohttp
-
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
@@ -78,7 +76,7 @@ class MypvCommunicator(DataUpdateCoordinator):
     async def initialize(self):
         """Do the async stuff."""
 
-        detected_ips = await detect_mypv(self.hosts[0])
+        await detect_mypv(self.hosts[0])
         for ip_str in self.hosts:
             try:
                 info_data = await self.check_ip(ip_str)
@@ -182,7 +180,7 @@ class MypvCommunicator(DataUpdateCoordinator):
         """Set power control mode, e.g. html."""
         try:
             url = f"http://{device.ip}/setup.jsn?ctrl={act_mode}"
-            response_text = await self.do_get_request(url)
+            await self.do_get_request(url)
             # self.get_state_dict(response_text, device)
             return True  # noqa: TRY300
         except Exception as err_msg:  # noqa: BLE001

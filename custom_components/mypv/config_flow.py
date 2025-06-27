@@ -6,14 +6,13 @@ from json import JSONDecodeError
 from typing import Any
 
 import requests
-from requests.exceptions import ConnectTimeout, HTTPError
 import voluptuous as vol
-
 from homeassistant import config_entries
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.data_entry_flow import FlowResult
+from requests.exceptions import ConnectTimeout, HTTPError
 
-from .const import CONF_HOSTS, DEV_IP, DOMAIN, MAX_IP, MIN_IP
+from .const import CONF_HOSTS, DEV_IP, DOMAIN
 
 
 @callback
