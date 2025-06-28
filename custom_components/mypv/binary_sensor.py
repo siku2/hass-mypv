@@ -71,5 +71,16 @@ class MpvBinSensor(CoordinatorEntity, BinarySensorEntity):
                 "Update for %s failed, key %s not found", self.entity_id, key
             )
         else:
-            self._attr_is_on = bool(value)
+            self._attr_is_on = _map_bool_value(value)
             super()._handle_coordinator_update()
+
+
+def _map_bool_value(value: Any) -> bool:
+    match value:
+        case "1" | 1 | True:
+            return True
+        case "0" | 0 | False:
+            return False
+        case _:
+            _LOGGER.warning("Unexpected value for binary sensor: %r", value)
+            return bool(value)
