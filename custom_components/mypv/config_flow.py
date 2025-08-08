@@ -12,7 +12,7 @@ import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.core import HomeAssistant, callback
 
-from .const import CONF_HOSTS, DEV_IP, DOMAIN, MAX_IP, MIN_IP
+from .const import CONF_HOSTS, DEV_IP, DOMAIN
 
 
 @callback
