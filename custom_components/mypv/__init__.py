@@ -59,6 +59,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
         raise ConfigEntryNotReady(
             f"Timeout while connecting to myPV device at {entry.data[DEV_IP]}"
         ) from ex
+    except Exception as ex:
+        raise ConfigEntryNotReady(
+            f"Error while setting up myPV device at {entry.data[DEV_IP]}"
+        ) from ex
     else:
         return True
 
